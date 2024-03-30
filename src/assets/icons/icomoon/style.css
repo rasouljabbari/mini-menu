@@ -1,0 +1,375 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?o9b776');
+  src:  url('fonts/icomoon.eot?o9b776#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?o9b776') format('truetype'),
+    url('fonts/icomoon.woff?o9b776') format('woff'),
+    url('fonts/icomoon.svg?o9b776#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shopping-bag:before {
+  content: "\e973";
+}
+.icon-new_berger:before {
+  content: "\e900";
+}
+.icon-new_egg:before {
+  content: "\e901";
+}
+.icon-new_fish:before {
+  content: "\e902";
+}
+.icon-new_gablame:before {
+  content: "\e903";
+}
+.icon-new_kebab:before {
+  content: "\e904";
+}
+.icon-new_pasta:before {
+  content: "\e905";
+}
+.icon-new_pizza:before {
+  content: "\e906";
+}
+.icon-new_salad:before {
+  content: "\e907";
+}
+.icon-new_sibzamini:before {
+  content: "\e908";
+}
+.icon-new_soop:before {
+  content: "\e909";
+}
+.icon-new_sorsore:before {
+  content: "\e90a";
+}
+.icon-menu-burger-square1:before {
+  content: "\e90b";
+}
+.icon-arrow-left:before {
+  content: "\e90c";
+}
+.icon-calendar:before {
+  content: "\e90d";
+}
+.icon-chef-gear-hat:before {
+  content: "\e90e";
+}
+.icon-chef-gear-hat-pin-location:before {
+  content: "\e90f";
+}
+.icon-chevron-down:before {
+  content: "\e910";
+}
+.icon-Circles:before {
+  content: "\e911";
+}
+.icon-Circles1:before {
+  content: "\e912";
+}
+.icon-download-arrow:before {
+  content: "\e913";
+}
+.icon-Eye:before {
+  content: "\e914";
+}
+.icon-eye-cross_1:before {
+  content: "\e915";
+}
+.icon-Help-icon:before {
+  content: "\e916";
+}
+.icon-home-add-plus:before {
+  content: "\e917";
+}
+.icon-Item1:before {
+  content: "\e918";
+}
+.icon-Item:before {
+  content: "\e919";
+}
+.icon-log-out-01:before {
+  content: "\e91a";
+}
+.icon-menu-burger-square:before {
+  content: "\e91b";
+}
+.icon-menu-list-hef-gear-hat-favorite:before {
+  content: "\e91c";
+}
+.icon-menu-restaurant:before {
+  content: "\e91d";
+}
+.icon-message-question-checkmark:before {
+  content: "\e91e";
+}
+.icon-Pen:before {
+  content: "\e91f";
+}
+.icon-Plus3:before {
+  content: "\e920";
+}
+.icon-qr-code-01:before {
+  content: "\e921";
+}
+.icon-receipt-currency-dollar:before {
+  content: "\e922";
+}
+.icon-search-lg:before {
+  content: "\e923";
+}
+.icon-Settings:before {
+  content: "\e924";
+}
+.icon-shopping-bag-add-plus:before {
+  content: "\e925";
+}
+.icon-shopping-bag-checkmark:before {
+  content: "\e926";
+}
+.icon-shopping-bag-checkmark-1:before {
+  content: "\e927";
+}
+.icon-sign-checkmark-1:before {
+  content: "\e928";
+}
+.icon-User:before {
+  content: "\e929";
+}
+.icon-user-01:before {
+  content: "\e92a";
+}
+.icon-zap:before {
+  content: "\e92b";
+}
+.icon-burger-cheese:before {
+  content: "\e92c";
+}
+.icon-Ice-cream:before {
+  content: "\e92d";
+}
+.icon-milk-bottle:before {
+  content: "\e92e";
+}
+.icon-seafood-sushi:before {
+  content: "\e92f";
+}
+.icon-kitchen-cloche-_1:before {
+  content: "\e930";
+}
+.icon-outdoor-table-restaurant:before {
+  content: "\e931";
+}
+.icon-vine-tray-wine-glass:before {
+  content: "\e932";
+}
+.icon-barbecue-bbq:before {
+  content: "\e933";
+}
+.icon-Chef:before {
+  content: "\e934";
+}
+.icon-Ladle:before {
+  content: "\e935";
+}
+.icon-roller-whisk:before {
+  content: "\e936";
+}
+.icon-Salt:before {
+  content: "\e937";
+}
+.icon-stove-induction-pan:before {
+  content: "\e938";
+}
+.icon-stove-induction-pot:before {
+  content: "\e939";
+}
+.icon-Knife:before {
+  content: "\e93a";
+}
+.icon-lemon-slice:before {
+  content: "\e93b";
+}
+.icon-bread:before {
+  content: "\e93c";
+}
+.icon-cake-cherry:before {
+  content: "\e93d";
+}
+.icon-candy:before {
+  content: "\e93e";
+}
+.icon-cheese:before {
+  content: "\e93f";
+}
+.icon-chicken-leg:before {
+  content: "\e940";
+}
+.icon-coffee:before {
+  content: "\e941";
+}
+.icon-croissant:before {
+  content: "\e942";
+}
+.icon-fried-egg:before {
+  content: "\e943";
+}
+.icon-jam-jar:before {
+  content: "\e944";
+}
+.icon-jar-honey:before {
+  content: "\e945";
+}
+.icon-jelly-cake:before {
+  content: "\e946";
+}
+.icon-meat-steak:before {
+  content: "\e947";
+}
+.icon-pie-cake:before {
+  content: "\e948";
+}
+.icon-porridge:before {
+  content: "\e949";
+}
+.icon-salad-leaves:before {
+  content: "\e94a";
+}
+.icon-seafood-fish:before {
+  content: "\e94b";
+}
+.icon-shrimp:before {
+  content: "\e94c";
+}
+.icon-slice-of-bread:before {
+  content: "\e94d";
+}
+.icon-turkey:before {
+  content: "\e94e";
+}
+.icon-Asian-Food:before {
+  content: "\e94f";
+}
+.icon-Beer:before {
+  content: "\e950";
+}
+.icon-bowl-chopsticks-noodles:before {
+  content: "\e951";
+}
+.icon-coffee-mug-hot:before {
+  content: "\e952";
+}
+.icon-Drink:before {
+  content: "\e953";
+}
+.icon-French:before {
+  content: "\e954";
+}
+.icon-Hot-dog:before {
+  content: "\e955";
+}
+.icon-Ice-cream-1:before {
+  content: "\e956";
+}
+.icon-pizza:before {
+  content: "\e957";
+}
+.icon-popcorn:before {
+  content: "\e958";
+}
+.icon-rap-burrito:before {
+  content: "\e959";
+}
+.icon-soda:before {
+  content: "\e95a";
+}
+.icon-Tacos:before {
+  content: "\e95b";
+}
+.icon-tea:before {
+  content: "\e95c";
+}
+.icon-offee:before {
+  content: "\e95d";
+}
+.icon-minus:before {
+  content: "\e95e";
+}
+.icon-profile-circle:before {
+  content: "\e95f";
+}
+.icon-mobile:before {
+  content: "\e960";
+}
+.icon-notifications_active:before {
+  content: "\e961";
+}
+.icon-add:before {
+  content: "\e962";
+}
+.icon-arrow-down:before {
+  content: "\e963";
+}
+.icon-arrow-left1:before {
+  content: "\e964";
+}
+.icon-arrow-right:before {
+  content: "\e965";
+}
+.icon-arrow-up:before {
+  content: "\e966";
+}
+.icon-close-circle:before {
+  content: "\e967";
+}
+.icon-all_edit:before {
+  content: "\e968";
+}
+.icon-danger:before {
+  content: "\e969";
+}
+.icon-setting_menu:before {
+  content: "\e96a";
+}
+.icon-toggle-off-circle:before {
+  content: "\e96b";
+}
+.icon-toggle-on-circle:before {
+  content: "\e96c";
+}
+.icon-gallery:before {
+  content: "\e96d";
+}
+.icon-percentage-circle:before {
+  content: "\e96e";
+}
+.icon-trash:before {
+  content: "\e96f";
+}
+.icon-location:before {
+  content: "\e970";
+}
+.icon-card-remove:before {
+  content: "\e971";
+}
+.icon-card-tick:before {
+  content: "\e972";
+}
