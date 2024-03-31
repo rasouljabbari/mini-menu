@@ -1,10 +1,10 @@
-import React , {memo} from 'react';
+import React, { memo } from 'react';
 import { NumericFormat } from 'react-number-format';
 
-function NumberInputWithLabel({label, placeholder, name, value, handler, max, hasPrice = false,isReadOnly = false}) {
+function NumberInputWithLabel({ label, placeholder, name, value, handler, max, hasPrice = false, isReadOnly = false }) {
     const changeHandler = (e) => {
         const inputValue = hasPrice ? e.target.value?.replaceAll(',', '') : e.target.value
-        
+
         if (max) {
             if (inputValue <= max) {
                 handler(inputValue)
@@ -23,7 +23,7 @@ function NumberInputWithLabel({label, placeholder, name, value, handler, max, ha
             <div className="w-full rounded-lg relative border border-gray-300">
                 {
                     hasPrice ?
-                        <NumericFormat 
+                        <NumericFormat
                             readOnly={isReadOnly}
                             className={`${hasPrice ? 'pr-3 pl-14' : 'px-3'} w-full border-0 outline-0 shadow-new-button placeholder:text-gray-400 placeholder:text-xs py-2 rounded-lg text-sm`}
                             placeholder={placeholder}
@@ -45,7 +45,7 @@ function NumberInputWithLabel({label, placeholder, name, value, handler, max, ha
                 }
                 {
                     hasPrice &&
-                    <span className='absolute left-3 top-1/2 -translate-y-1/2 text-base text-gray-600'>تومان</span>
+                    <span className='absolute left-3 top-1/2 -translate-y-1/2 text-base text-gray-600'>ریال</span>
                 }
             </div>
         </div>

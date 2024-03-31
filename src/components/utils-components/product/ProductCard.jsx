@@ -61,7 +61,7 @@ function ProductCard({ product, setProducts }) {
           <span
             className={`whitespace-nowrap text-center text-white text-xl py-1 font-normal`}
           >
-            {product?.price?.toLocaleString()} ت
+            {product?.price?.toLocaleString()} ﷼
           </span>
         </div>
       </div>

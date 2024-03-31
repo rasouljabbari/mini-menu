@@ -25,7 +25,7 @@ const MemoOrdersTable = ({ orders, setOrders }) => {
                 <thead className='bg-jungle-800'>
                     <tr>
                         <th className='text-start text-white p-2'>نام مشتری</th>
-                        <th className='text-start text-white p-2 whitespace-nowrap'>مبلغ کل</th>
+                        <th className='text-end text-white p-2 whitespace-nowrap' dir='ltr'>(﷼) مبلغ کل</th>
                         <th className='text-center text-white p-2'>جزئیات</th>
                     </tr>
                 </thead>
