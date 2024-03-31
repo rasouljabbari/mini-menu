@@ -14,7 +14,7 @@ function Cart({ cart, incrementQuantity, decrementQuantity, removeFromCart }) {
       <ul className="flex flex-col gap-2 bg-primary-100 p-3 rounded">
         {cart.items.map((item) => (
           <li key={item.id} className="grid grid-cols-2">
-            {item.title} - {item.price} ریال
+            {item.title} - {(item.price)?.toLocaleString()} ریال
             <div className="flex items-center justify-end gap-2">
               <Counter incrementQuantity={incrementQuantity} decrementQuantity={decrementQuantity} order={item} />
               {

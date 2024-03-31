@@ -9,9 +9,15 @@ function Cart({ cart }) {
       <ul className="flex flex-col gap-2 bg-primary-100 p-3 rounded">
         {cart.items.map((item) => (
           <li key={item.id} className="grid grid-cols-2">
-            {item.title} - {item.price} ریال
+            <div className="flex items-center gap-1">
+              <b>{item.quantity}</b>
+
+              عدد
+
+              <b>{item.title}</b>
+            </div>
             <div className="flex items-center justify-end gap-4">
-              تعداد : {item?.quantity}
+              مبلغ: {(item?.price * item?.quantity).toLocaleString()}
 
             </div>
           </li>

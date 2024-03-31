@@ -34,7 +34,7 @@ const MemoOrdersTable = ({ orders, setOrders }) => {
                         orders?.map(order => (
                             <tr key={order?.id}>
                                 <td className='text-start p-2 whitespace-nowrap'>{order?.full_name}</td>
-                                <td className='text-start p-2'>{sumPrice(order)}</td>
+                                <td className='text-start p-2'>{sumPrice(order)?.toLocaleString()}</td>
                                 <td className='flex items-center flex-wrap justify-center gap-1 py-2 px-1'>
                                     <button className='bg-blue-200 p-1' onClick={() => setShowInfo(order)}>جزئیات</button>
                                     <button className='bg-blue-100 p-1' onClick={() => setShowEdit(order)}>ویرایش</button>
