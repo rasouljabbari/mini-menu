@@ -9,6 +9,7 @@ const customSwalData = {
 }
 
 export const apiErrorHandler = (e) => {
+  console.log(e.response);
   if (e.message === 'Network Error') {
     Swal.fire({
       icon: 'error',
@@ -16,12 +17,12 @@ export const apiErrorHandler = (e) => {
       ...customSwalData,
       confirmButtonText: 'بستن',
     })
-  } else if (e.response?.['status'] === 400) {
+  } else if (e.response?.['status'] === 422) {
     toast.error('.لطفا خطاهای به وجود آمده را رفع کنید')
     if (e.response?.data['errors']) {
-      return { status: 400, error: e.response?.data['errors'] }
+      return { status: 422, error: e.response?.data['errors'] }
     } else {
-      return { status: 400, error: e.response?.data['message'] }
+      return { status: 422, error: e.response?.data['message'] }
     }
   } else if (e.response?.['status'] === 403) {
     if (e.response?.data['errors']?.['verify_code']) {

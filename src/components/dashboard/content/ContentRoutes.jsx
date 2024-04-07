@@ -12,7 +12,7 @@ function ContentRoutes() {
   return (
     <GotoTopPage>
       <Routes>
-        <Route path="/" element={<Navigate to="cafe-menu" replace />} />
+        <Route index element={<Navigate to="cafe-menu" replace />} />
         <Route path={"cafe-menu"} element={<CafeMenu />} />
         <Route path={"orders"} element={<Orders />} />
         <Route path={"management"} element={<Management />} />
