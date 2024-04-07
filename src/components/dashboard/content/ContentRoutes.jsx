@@ -12,8 +12,8 @@ function ContentRoutes() {
   return (
     <GotoTopPage>
       <Routes>
-        <Route index element={<Navigate to="cafe-menu" replace />} />
-        <Route path={"cafe-menu"} element={<CafeMenu />} />
+        <Route index element={<Navigate to="menu" replace />} />
+        <Route path={"menu"} element={<CafeMenu />} />
         <Route path={"orders"} element={<Orders />} />
         <Route path={"management"} element={<Management />} />
         <Route path={"*"} element={<NotFound />} />

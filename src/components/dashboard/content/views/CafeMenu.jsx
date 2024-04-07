@@ -3,15 +3,23 @@ import AddNewItemButton from "../../../utils-components/button/AddNewItemButton"
 import ProductCard from "../../../utils-components/product/ProductCard";
 import ModalParent from "../../components/ModalParent";
 import AddItemModalForCustomerModal from "../../components/AddItemModalForCustomerModal";
+import { useQuery } from "@tanstack/react-query";
+import { productsListApi } from "../../../../api/productsApi";
 
 const MemoCafeMenu = () => {
     const [products, setProducts] = useState([])
     const [showModal, setShowModal] = useState(false);
 
+    const { data, isLoading } = useQuery({
+        queryKey: ["products"],
+        queryFn: () => productsListApi(),
+    });
+
     useEffect(() => {
-        const storedProducts = JSON.parse(localStorage.getItem('products')) || [];
-        setProducts(storedProducts);
-    }, [localStorage.getItem('products')]);
+        setProducts(data?.response?.products);
+    }, [data]);
+
+    console.log(data, isLoading);
 
     return (
         <>
@@ -24,20 +32,23 @@ const MemoCafeMenu = () => {
                         handler={() => setShowModal(true)}
                     />
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-12 pb-20">
-                    {
+                {
+                    isLoading ? <h5 className="text-primary-600 bg-primary-100 p-1 rounded-md text-center text-3xl py-8 col-span-2 sm:col-span-4">در حال بارگذاری...</h5>
+                        :
                         products?.length > 0 ?
-                            products?.map((product, index) => (
-                                <ProductCard
-                                    setProducts={setProducts}
-                                    key={index}
-                                    product={product}
-                                />
-                            )) :
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-12 pb-20">
+                                {
+                                    products?.map((product, index) => (
+                                        <ProductCard
+                                            setProducts={setProducts}
+                                            key={index}
+                                            product={product}
+                                        />
+                                    ))
+                                }
+                            </div> :
                             <h5 className="text-primary-600 bg-primary-100 p-1 rounded-md text-center text-3xl py-8 col-span-2 sm:col-span-4">محصولی ثبت نشده است.</h5>
-                    }
-
-                </div>
+                }
             </div>
 
             {showModal && (

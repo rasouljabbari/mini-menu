@@ -4,6 +4,7 @@ import { Images } from "../../../utils/Images";
 import AddItemForMenuModal from "../../dashboard/components/AddItemForMenuModal";
 import ModalParent from "../../dashboard/components/ModalParent";
 import { toast } from "react-toastify";
+import { MAIN_URL_IMAGE } from "../../../utils/GeneralVariables";
 
 function ProductCard({ product, setProducts }) {
 
@@ -41,7 +42,7 @@ function ProductCard({ product, setProducts }) {
           <img
             className={`w-[115px] h-[115px] object-cover rounded-full`}
             // src={URL.createObjectURL(product?.image)}
-            src={product?.image}
+            src={MAIN_URL_IMAGE + product?.image}
             onError={({ currentTarget }) => {
               currentTarget.onerror = null; // prevents looping
               currentTarget.src = Images.placeholder;
