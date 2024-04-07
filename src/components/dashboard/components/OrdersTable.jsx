@@ -7,8 +7,8 @@ import RemoveItemModal from './RemoveItemModal';
 
 function sumPrice(order) {
     let totalPrice = 0
-    order?.items?.forEach(item => {
-        totalPrice += item?.price * item?.quantity
+    order?.products?.forEach(item => {
+        totalPrice += item?.price * item?.pivot?.product_count
     });
     return totalPrice
 }
@@ -26,6 +26,7 @@ const MemoOrdersTable = ({ orders, setOrders }) => {
                     <tr>
                         <th className='text-start text-white p-2'>نام مشتری</th>
                         <th className='text-end text-white p-2 whitespace-nowrap' dir='ltr'>(﷼) مبلغ کل</th>
+                        <th className='text-end text-white p-2 whitespace-nowrap' dir='ltr'>(﷼) مبلغ پرداختی</th>
                         <th className='text-center text-white p-2'>جزئیات</th>
                     </tr>
                 </thead>
@@ -35,6 +36,7 @@ const MemoOrdersTable = ({ orders, setOrders }) => {
                             <tr key={order?.id}>
                                 <td className='text-start p-2 whitespace-nowrap'>{order?.full_name}</td>
                                 <td className='text-start p-2'>{sumPrice(order)?.toLocaleString()}</td>
+                                <td className='text-start p-2'>{order?.paid_cost?.toLocaleString()}</td>
                                 <td className='flex items-center flex-wrap justify-center gap-1 py-2 px-1'>
                                     <button className='bg-blue-200 p-1' onClick={() => setShowInfo(order)}>جزئیات</button>
                                     <button className='bg-blue-100 p-1' onClick={() => setShowEdit(order)}>ویرایش</button>

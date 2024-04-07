@@ -7,17 +7,17 @@ function Cart({ cart }) {
     <div className="flex flex-col gap-2">
       <h2>موارد انتخاب شده :‌</h2>
       <ul className="flex flex-col gap-2 bg-primary-100 p-3 rounded">
-        {cart.items.map((item) => (
+        {cart.products.map((item) => (
           <li key={item.id} className="grid grid-cols-2">
             <div className="flex items-center gap-1">
-              <b>{item.quantity}</b>
+              <b>{item?.pivot?.product_count}</b>
 
               عدد
 
-              <b>{item.title}</b>
+              <span>{item.title}</span>
             </div>
             <div className="flex items-center justify-end gap-4">
-              مبلغ: {(item?.price * item?.quantity).toLocaleString()}
+              مبلغ: {(item?.price * item?.pivot?.product_count).toLocaleString()}
 
             </div>
           </li>
@@ -38,7 +38,7 @@ const MemoShowOrderInfoModal = ({ order, setShowModal }) => {
       <div className="flex flex-col gap-4">
 
         {
-          order?.items?.length > 0 &&
+          order?.products?.length > 0 &&
 
           <Cart cart={order} />
         }

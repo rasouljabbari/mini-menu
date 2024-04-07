@@ -16,10 +16,8 @@ const MemoCafeMenu = () => {
     });
 
     useEffect(() => {
-        setProducts(data?.response?.products);
+        setProducts(data?.products?.data);
     }, [data]);
-
-    console.log(data, isLoading);
 
     return (
         <>
@@ -53,7 +51,8 @@ const MemoCafeMenu = () => {
 
             {showModal && (
                 <ModalParent removeCloseIcon size="md" setShowModal={setShowModal}>
-                    <AddItemModalForCustomerModal setShowModal={setShowModal} />
+                    <AddItemModalForCustomerModal
+                        setShowModal={setShowModal} />
                 </ModalParent>
             )}
         </>

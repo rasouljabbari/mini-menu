@@ -17,8 +17,8 @@ export default function Login() {
         mutationFn: loginApi,
         onSuccess: async ({ data }) => {
             console.log(data);
-            localStorage.setItem("Token", data?.response?.token)
-            localStorage.setItem("user", data?.response?.user)
+            localStorage.setItem("Token", data?.token)
+            localStorage.setItem("user", data?.user)
             window.location.href = "/"
             setErrorInfo(null)
         },

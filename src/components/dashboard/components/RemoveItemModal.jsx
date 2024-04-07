@@ -1,18 +1,29 @@
 import React, { memo } from 'react';
 import { remove_item_of_arr_with_id } from '../../../utils/GeneralFunctions.js';
+import { useMutation } from '@tanstack/react-query';
+import { destroyOrderApi } from '../../../api/ordersApi.js';
 
 function RemoveItemModal({ setShowModal, order, orders, setOrders }) {
 
+    const mutation = useMutation({
+        mutationFn: destroyOrderApi,
+        onSuccess: async ({ data }) => {
+            console.log(data);
+            localStorage.setItem("Token", data?.response?.token)
+            localStorage.setItem("user", data?.response?.user)
+            window.location.href = "/"
+        },
+    })
+
     const removeHandler = () => {
-        let removedList = remove_item_of_arr_with_id(orders, order?.id)
-        localStorage.setItem('orders', JSON.stringify(removedList))
-        setOrders(removedList)
-        setShowModal(null)
+        mutation.mutate(order?.id)
+        // setOrders(removedList)
+        // setShowModal(null)
     }
     return (
         <div>
             {
-                <div>
+                <div className='flex flex-col items-start justify-start gap-3'>
                     <p className="text-gray-900 text-lg font-semibold">حذف سفارش</p>
                     <span
                         className="text-base font-medium text-gray-700 text-center">آیا از حذف سفارش {order?.full_name} مطمئن هستید؟</span>
