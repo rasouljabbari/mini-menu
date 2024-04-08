@@ -39,7 +39,6 @@ const MemoManagement = () => {
                 <ProductCard
                   key={index}
                   product={product}
-                  setProducts={setProducts}
                   refetch={refetch}
                 />
               )) :
@@ -51,7 +50,7 @@ const MemoManagement = () => {
 
       {showModal && (
         <ModalParent removeCloseIcon size="md" setShowModal={setShowModal}>
-          <AddItemForMenuModal refetch={refetch} setProducts={setProducts} setShowModal={setShowModal} />
+          <AddItemForMenuModal refetch={refetch} setShowModal={setShowModal} />
         </ModalParent>
       )}
     </>

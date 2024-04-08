@@ -5,14 +5,13 @@ import NumberInputWithLabel from "../../utils-components/input/NumberInputWithLa
 import UploadFileWithLabel from "../../utils-components/input/UploadFileWithLabel";
 import { toast } from "react-toastify";
 import SubmitButton from "../../utils-components/button/SubmitButton";
-import { remove_item_of_arr_with_id } from "../../../utils/GeneralFunctions";
 import { useMutation } from "@tanstack/react-query";
-import { storeProductApi, updateProductApi } from "../../../api/productsApi";
+import { destroyProductApi, storeProductApi, updateProductApi } from "../../../api/productsApi";
 import { apiErrorHandler } from "../../../utils/errorHandling";
 import InputError from "../../utils-components/input/InputError";
 import { MAIN_URL_IMAGE } from "../../../utils/GeneralVariables";
 
-const MemoAddItemForMenuModal = ({ item, refetch, setProducts, setShowModal }) => {
+const MemoAddItemForMenuModal = ({ item, refetch, setShowModal }) => {
   const [inputs, setInputs] = useState({
     title: "",
     price: null,
@@ -48,11 +47,24 @@ const MemoAddItemForMenuModal = ({ item, refetch, setProducts, setShowModal }) =
     }
   };
 
+  const destroyProductMutation = useMutation({
+    mutationFn: destroyProductApi,
+    onSuccess: async () => {
+      toast.success(`محصول با موفقیت حذف شد.`)
+      refetch()
+      setShowModal(false)
+    },
+    onError: (error) => {
+      const errorResponse = apiErrorHandler(error);
+      if (errorResponse?.status === 422) {
+        setErrorInfo(errorResponse?.error);
+      }
+    },
+  })
+
+
   const removeHandler = (item) => {
-    const updatedItems = remove_item_of_arr_with_id(JSON.parse(localStorage.getItem('products')), item?.id)
-    localStorage.setItem('products', JSON.stringify(updatedItems));
-    setProducts(updatedItems)
-    setShowModal(false)
+    destroyProductMutation.mutate(item?.id)
   }
 
   const storeProductMutation = useMutation({

@@ -16,7 +16,6 @@ export default function Login() {
     const mutation = useMutation({
         mutationFn: loginApi,
         onSuccess: async ({ data }) => {
-            console.log(data);
             localStorage.setItem("Token", data?.token)
             localStorage.setItem("user", data?.user)
             window.location.href = "/"
@@ -24,7 +23,6 @@ export default function Login() {
         },
         onError: (error) => {
             const errorResponse = apiErrorHandler(error);
-            console.log(errorResponse);
             if (errorResponse?.status === 422) {
                 setErrorInfo(errorResponse?.error);
             }

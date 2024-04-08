@@ -25,3 +25,6 @@ export async function updateProductApi({ title, image, price, id }) {
     return await getFormDataPost(`admin/products/update/${id}`, dataParams)
 }
 
+export async function destroyProductApi(id) {
+    return await getData(MAIN_URL, `admin/products/destroy/${id}`, 'get', {}, true)
+}

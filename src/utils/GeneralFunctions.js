@@ -95,7 +95,6 @@ export const getData = async (
             const response = isToken
                 ? await axios.get(base_url + url + formData, header)
                 : await axios.get(base_url + url + formData)
-        console.log(response, response?.status);
         
             if (response?.status === 200) {
                 return response?.data

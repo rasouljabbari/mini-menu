@@ -12,8 +12,7 @@ function RemoveItemModal({ setShowModal, order, setOrders }) {
 
     const mutation = useMutation({
         mutationFn: destroyOrderApi,
-        onSuccess: async (data) => {
-            console.log("data : ", data);
+        onSuccess: async () => {
             toast.success(`سفارش ${order?.full_name} با موفقیت حذف شد.`)
             setOrders(prev => remove_item_of_arr_with_id(prev, order?.id))
             setShowModal(null)
@@ -21,7 +20,6 @@ function RemoveItemModal({ setShowModal, order, setOrders }) {
         onError: (error) => {
             
             const errorResponse = apiErrorHandler(error);
-            console.log(error, errorResponse);
             if (errorResponse?.status === 422) {
                 setErrorInfo(errorResponse?.error);
             }
