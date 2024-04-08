@@ -2,19 +2,19 @@ export const APP_KEY = '75c952551aa81b0737cb'
 export const APP_CLUSTER = 'ap2'
 
 export const asideIcons = {
-    'cafe-menu': 'icon-coffee-mug-hot',
+    'menu': 'icon-coffee-mug-hot',
     'orders': 'icon-shopping-bag',
     'management': 'icon-Settings',
 }
 
 export const asideTitles = {
-    'cafe-menu': 'منوی کافه',
+    'menu': 'منوی کافه',
     'orders': 'سفارشات',
     'management': 'مدیریت',
 }
 
 export const BOTTOM_PAGES = [
-    'cafe-menu',
+    'menu',
     'orders',
     'management',
 ]
