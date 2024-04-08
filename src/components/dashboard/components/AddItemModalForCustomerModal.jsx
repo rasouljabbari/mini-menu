@@ -6,6 +6,11 @@ import AddNewItemButton from "../../utils-components/button/AddNewItemButton";
 import Counter from "../../utils-components/Counter";
 import { toast } from "react-toastify";
 import { edit_item_with_id } from "../../../utils/GeneralFunctions";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { productsListApi } from "../../../api/productsApi";
+import { storeOrderApi, updateOrderApi } from "../../../api/ordersApi";
+import { apiErrorHandler } from "../../../utils/errorHandling";
+import InputError from "../../utils-components/input/InputError";
 
 function Cart({ cart, incrementQuantity, decrementQuantity, removeFromCart }) {
   return (
@@ -31,31 +36,35 @@ function Cart({ cart, incrementQuantity, decrementQuantity, removeFromCart }) {
 
 const MemoAddItemModalForCustomerModal = ({ order, setOrders, setShowModal }) => {
 
-  const [products, setProducts] = useState([])
   const [searchValue, setSearchValue] = useState('')
+  const [errorInfo, setErrorInfo] = useState(null)
 
   const [inputs, setInputs] = useState({
     full_name: "",
     items: [],
   });
 
+  // fetch products
+  const { data } = useQuery({
+    queryKey: ["products"],
+    queryFn: () => productsListApi(),
+  });
+
   useEffect(() => {
     if (order) {
       setInputs({
         full_name: order?.full_name,
-        items: order?.items,
+        items: order?.products?.map(product => ({
+          ...product,
+          quantity: product?.pivot?.product_count
+        })),
       })
     }
   }, [order])
 
-  useEffect(() => {
-    const storedProducts = JSON.parse(localStorage.getItem('products')) || [];
-    setProducts(storedProducts);
-  }, [localStorage.getItem('products')]);
-
   const addToCartHandler = (itemToAdd) => {
 
-    const existingItemIndex = inputs.items.findIndex(item => item?.id === itemToAdd?.id);
+    const existingItemIndex = inputs.items?.findIndex(item => item?.id === itemToAdd?.id);
 
     if (existingItemIndex !== -1) {
       const updatedItems = [...inputs.items];
@@ -85,30 +94,55 @@ const MemoAddItemModalForCustomerModal = ({ order, setOrders, setShowModal }) =>
     setInputs({ ...inputs, items: updatedItems });
   };
 
+  const storeOrderMutation = useMutation({
+    mutationFn: storeOrderApi,
+    onSuccess: async ({ data }) => {
+      toast.success(`سفارش ${data?.order?.full_name} با موفقیت ثبت شد.`)
+      setOrders(prev => [...prev, data?.order])
+      setShowModal(false)
+      setInputs({
+        full_name: "",
+        items: [],
+      })
+    },
+    onError: (error) => {
+      const errorResponse = apiErrorHandler(error);
+      if (errorResponse?.status === 422) {
+        setErrorInfo(errorResponse?.error);
+      }
+    },
+  })
+
+  const updateOrderMutation = useMutation({
+    mutationFn: updateOrderApi,
+    onSuccess: async ({ data }) => {
+      toast.success(`سفارش ${data?.order?.full_name} با موفقیت ویرایش شد.`)
+      setOrders && setOrders(prev => (edit_item_with_id(prev, data?.order)))
+
+      setShowModal(false)
+      setInputs({
+        full_name: "",
+        items: [],
+      })
+    },
+    onError: (error) => {
+      const errorResponse = apiErrorHandler(error);
+      if (errorResponse?.status === 422) {
+        setErrorInfo(errorResponse?.error);
+      }
+    },
+  })
+
   const submitHandler = (e) => {
     e.preventDefault();
-    const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
-
     if (order?.id) {
-      localStorage.setItem('orders', JSON.stringify(edit_item_with_id(existingOrders, { ...order, ...inputs })))
-      setOrders && setOrders(edit_item_with_id(existingOrders, { ...order, ...inputs }))
-      toast.success(`سفارش ${inputs?.full_name} با موفقیت ویرایش شد.`)
+      updateOrderMutation.mutate({id: order?.id, data: inputs})
     } else {
-      let id = 1
-      //find last id :
-      if (existingOrders?.length > 0) {
-        id = existingOrders[existingOrders?.length - 1]?.id
-        id++
-      }
-
-      localStorage.setItem('orders', JSON.stringify([...existingOrders, { id, ...inputs }]))
-      toast.success(`سفارش ${inputs?.full_name} با موفقیت ثبت شد.`)
+      storeOrderMutation.mutate(inputs)
     }
-    setShowModal(false)
-
   };
 
-  const searchedProduct = products?.filter(product => product?.title?.includes(searchValue))
+  const searchedProduct = data?.products?.filter(product => product?.title?.includes(searchValue))
 
   return (
     <form className="flex flex-col gap-6" onSubmit={submitHandler}>
@@ -163,6 +197,11 @@ const MemoAddItemModalForCustomerModal = ({ order, setOrders, setShowModal }) =>
         }
       </div>
 
+      {
+        errorInfo &&
+        <InputError errorItem={errorInfo} />
+      }
+
       <SubmitButton handler={() => setShowModal(false)} />
     </form>
   );
@@ -172,6 +211,7 @@ MemoAddItemModalForCustomerModal.propTypes = {
   setShowModal: PropTypes.func.isRequired,
   setOrders: PropTypes.func,
   order: PropTypes.object,
+  products: PropTypes.array.isRequired,
 };
 
 const AddItemModalForCustomerModal = memo(MemoAddItemModalForCustomerModal);

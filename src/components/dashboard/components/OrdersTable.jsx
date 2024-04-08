@@ -4,6 +4,7 @@ import ModalParent from './ModalParent';
 import AddItemModalForCustomerModal from './AddItemModalForCustomerModal';
 import ShowOrderInfoModal from './ShowOrderInfoModal';
 import RemoveItemModal from './RemoveItemModal';
+import PaidCostModal from './PaidCostModal';
 
 function sumPrice(order) {
     let totalPrice = 0
@@ -16,6 +17,7 @@ function sumPrice(order) {
 const MemoOrdersTable = ({ orders, setOrders }) => {
 
     const [showEdit, setShowEdit] = useState(null)
+    const [showCostEdit, setShowCostEdit] = useState(null)
     const [showInfo, setShowInfo] = useState(null)
     const [showRemove, setShowRemove] = useState(null)
 
@@ -40,6 +42,7 @@ const MemoOrdersTable = ({ orders, setOrders }) => {
                                 <td className='flex items-center flex-wrap justify-center gap-1 py-2 px-1'>
                                     <button className='bg-blue-200 p-1' onClick={() => setShowInfo(order)}>جزئیات</button>
                                     <button className='bg-blue-100 p-1' onClick={() => setShowEdit(order)}>ویرایش</button>
+                                    <button className='bg-blue-100 p-1' onClick={() => setShowCostEdit(order)}>ویرایش قیمت</button>
                                     <button className='bg-rose-100 text-rose-700 p-1' onClick={() => setShowRemove(order)}>حذف</button>
                                 </td>
                             </tr>
@@ -54,6 +57,13 @@ const MemoOrdersTable = ({ orders, setOrders }) => {
                 </ModalParent>
             )}
 
+            {showCostEdit && (
+                <ModalParent removeCloseIcon size="md" setShowModal={setShowCostEdit}>
+                    <PaidCostModal order={showCostEdit} setOrders={setOrders} setShowModal={setShowCostEdit} />
+                </ModalParent>
+            )}
+
+            
             {showInfo && (
                 <ModalParent removeCloseIcon size="md" setShowModal={setShowInfo}>
                     <ShowOrderInfoModal order={showInfo} setShowModal={setShowInfo} />

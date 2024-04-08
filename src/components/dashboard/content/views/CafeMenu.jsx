@@ -16,7 +16,7 @@ const MemoCafeMenu = () => {
     });
 
     useEffect(() => {
-        setProducts(data?.products?.data);
+        setProducts(data?.products);
     }, [data]);
 
     return (

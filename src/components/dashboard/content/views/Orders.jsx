@@ -55,7 +55,9 @@ const MemoOrders = () => {
 
       {showModal && (
         <ModalParent removeCloseIcon size="md" setShowModal={setShowModal}>
-          <AddItemModalForCustomerModal setShowModal={setShowModal} />
+          <AddItemModalForCustomerModal
+            setOrders={setOrders}
+            setShowModal={setShowModal} />
         </ModalParent>
       )}
     </>

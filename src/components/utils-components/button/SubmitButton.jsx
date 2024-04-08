@@ -1,7 +1,9 @@
 import { memo } from "react";
+import Loading from "../Loading";
 
 function SubmitButton({
-    handler
+    handler,
+    isLoading = false
 }) {
     return (
         <div className="grid grid-cols-2 gap-3">
@@ -14,7 +16,7 @@ function SubmitButton({
             <button
                 type='submit'
                 className={'bg-jungle-500 border-jungle-600 hover:bg-jungle-700 w-full text-center text-white border shadow-new-button py-2.5 px-4 rounded-lg'}>
-                تایید
+                {isLoading ? <Loading text={"در حال ثبت"} /> : "ثبت"}
             </button>
         </div>
     );
