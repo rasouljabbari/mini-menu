@@ -11,7 +11,7 @@ const MemoManagement = () => {
   const [products, setProducts] = useState([])
   const [showModal, setShowModal] = useState(false);
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["products"],
     queryFn: () => productsListApi(),
   });
@@ -40,6 +40,7 @@ const MemoManagement = () => {
                   key={index}
                   product={product}
                   setProducts={setProducts}
+                  refetch={refetch}
                 />
               )) :
               <h5 className="text-primary-600 bg-primary-100 p-1 rounded-md text-center text-3xl py-8 col-span-2 sm:col-span-4">محصولی ثبت نشده است.</h5>
@@ -50,7 +51,7 @@ const MemoManagement = () => {
 
       {showModal && (
         <ModalParent removeCloseIcon size="md" setShowModal={setShowModal}>
-          <AddItemForMenuModal setProducts={setProducts} setShowModal={setShowModal} />
+          <AddItemForMenuModal refetch={refetch} setProducts={setProducts} setShowModal={setShowModal} />
         </ModalParent>
       )}
     </>

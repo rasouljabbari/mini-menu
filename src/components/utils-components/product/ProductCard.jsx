@@ -6,7 +6,7 @@ import ModalParent from "../../dashboard/components/ModalParent";
 import { toast } from "react-toastify";
 import { MAIN_URL_IMAGE } from "../../../utils/GeneralVariables";
 
-function ProductCard({ product, setProducts }) {
+function ProductCard({ product, setProducts, refetch }) {
 
   const [showItem, setShowItem] = useState(null)
 
@@ -69,7 +69,7 @@ function ProductCard({ product, setProducts }) {
 
       {showItem && (
         <ModalParent removeCloseIcon size="md" setShowModal={setShowItem}>
-          <AddItemForMenuModal item={showItem} setProducts={setProducts} setShowModal={setShowItem} />
+          <AddItemForMenuModal refetch={refetch} item={showItem} setProducts={setProducts} setShowModal={setShowItem} />
         </ModalParent>
       )}
     </>
