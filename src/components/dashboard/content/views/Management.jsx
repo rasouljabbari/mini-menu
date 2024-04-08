@@ -3,17 +3,22 @@ import AddNewItemButton from "../../../utils-components/button/AddNewItemButton"
 import ProductCard from "../../../utils-components/product/ProductCard";
 import ModalParent from "../../components/ModalParent";
 import AddItemForMenuModal from "../../components/AddItemForMenuModal";
+import { useQuery } from "@tanstack/react-query";
+import { productsListApi } from "../../../../api/productsApi";
 
 
 const MemoManagement = () => {
+  const [products, setProducts] = useState([])
   const [showModal, setShowModal] = useState(false);
 
-  const [products, setProducts] = useState([])
+  const { data, isLoading } = useQuery({
+    queryKey: ["products"],
+    queryFn: () => productsListApi(),
+  });
 
   useEffect(() => {
-    const storedProducts = JSON.parse(localStorage.getItem('products')) || [];
-    setProducts(storedProducts);
-  }, [localStorage.getItem('products')]);
+    setProducts(data?.products);
+  }, [data]);
 
   return (
     <>
@@ -28,6 +33,7 @@ const MemoManagement = () => {
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-12 pb-20">
           {
+            isLoading ? <h5 className="text-primary-600 bg-primary-100 p-1 rounded-md text-center text-3xl py-8 col-span-2 sm:col-span-4">در حال بارگذاری...</h5> :
             products?.length > 0 ?
               products?.map((product, index) => (
                 <ProductCard

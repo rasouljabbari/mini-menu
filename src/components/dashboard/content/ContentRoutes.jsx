@@ -2,7 +2,6 @@ import React, { memo } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import NotFound from "../../404/NotFound.jsx";
 import GotoTopPage from "../../../utils/GotoTopPage.jsx";
-import CafeMenu from "./views/CafeMenu.jsx";
 import Management from "./views/Management.jsx";
 import Orders from "./views/Orders.jsx";
 
@@ -12,8 +11,7 @@ function ContentRoutes() {
   return (
     <GotoTopPage>
       <Routes>
-        <Route index element={<Navigate to="menu" replace />} />
-        <Route path={"menu"} element={<CafeMenu />} />
+        <Route index element={<Navigate to="orders" replace />} />
         <Route path={"orders"} element={<Orders />} />
         <Route path={"management"} element={<Management />} />
         <Route path={"*"} element={<NotFound />} />
