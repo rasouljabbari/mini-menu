@@ -5,7 +5,6 @@ import SubmitButton from "../../utils-components/button/SubmitButton";
 import AddNewItemButton from "../../utils-components/button/AddNewItemButton";
 import Counter from "../../utils-components/Counter";
 import { toast } from "react-toastify";
-import { edit_item_with_id } from "../../../utils/GeneralFunctions";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { productsListApi } from "../../../api/productsApi";
 import { storeOrderApi, updateOrderApi } from "../../../api/ordersApi";
@@ -34,7 +33,7 @@ function Cart({ cart, incrementQuantity, decrementQuantity, removeFromCart }) {
   );
 }
 
-const MemoAddItemModalForCustomerModal = ({ order, setOrders, setShowModal }) => {
+const MemoAddItemModalForCustomerModal = ({ order, refetch, setShowModal }) => {
 
   const [searchValue, setSearchValue] = useState('')
   const [errorInfo, setErrorInfo] = useState(null)
@@ -98,7 +97,7 @@ const MemoAddItemModalForCustomerModal = ({ order, setOrders, setShowModal }) =>
     mutationFn: storeOrderApi,
     onSuccess: async ({ data }) => {
       toast.success(`سفارش ${data?.order?.full_name} با موفقیت ثبت شد.`)
-      setOrders(prev => [...prev, data?.order])
+      refetch && refetch()
       setShowModal(false)
       setInputs({
         full_name: "",
@@ -117,7 +116,7 @@ const MemoAddItemModalForCustomerModal = ({ order, setOrders, setShowModal }) =>
     mutationFn: updateOrderApi,
     onSuccess: async ({ data }) => {
       toast.success(`سفارش ${data?.order?.full_name} با موفقیت ویرایش شد.`)
-      setOrders && setOrders(prev => (edit_item_with_id(prev, data?.order)))
+      refetch && refetch()
 
       setShowModal(false)
       setInputs({
@@ -209,9 +208,9 @@ const MemoAddItemModalForCustomerModal = ({ order, setOrders, setShowModal }) =>
 
 MemoAddItemModalForCustomerModal.propTypes = {
   setShowModal: PropTypes.func.isRequired,
-  setOrders: PropTypes.func,
   order: PropTypes.object,
   products: PropTypes.array.isRequired,
+  refetch: PropTypes.func,
 };
 
 const AddItemModalForCustomerModal = memo(MemoAddItemModalForCustomerModal);

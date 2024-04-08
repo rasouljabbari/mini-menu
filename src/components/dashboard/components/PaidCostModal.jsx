@@ -2,7 +2,6 @@ import { memo, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import SubmitButton from "../../utils-components/button/SubmitButton";
 import { toast } from "react-toastify";
-import { edit_item_with_id } from "../../../utils/GeneralFunctions";
 import { useMutation } from "@tanstack/react-query";
 import { updateOrderCostApi } from "../../../api/ordersApi";
 import { apiErrorHandler } from "../../../utils/errorHandling";
@@ -10,7 +9,7 @@ import InputError from "../../utils-components/input/InputError";
 import NumberInputWithLabel from "../../utils-components/input/NumberInputWithLabel";
 
 
-const MemoPaidCostModal = ({ order, setOrders, setShowModal }) => {
+const MemoPaidCostModal = ({ order, setShowModal, refetch }) => {
 
   const [paidCost, setPaidCost] = useState(0)
   const [errorInfo, setErrorInfo] = useState(null)
@@ -23,7 +22,7 @@ const MemoPaidCostModal = ({ order, setOrders, setShowModal }) => {
     mutationFn: updateOrderCostApi,
     onSuccess: async ({ data }) => {
       toast.success(`سفارش ${data?.order?.full_name} با موفقیت ویرایش شد.`)
-      setOrders && setOrders(prev => (edit_item_with_id(prev, data?.order)))
+      refetch()
       setShowModal(false)
     },
     onError: (error) => {
@@ -64,8 +63,8 @@ const MemoPaidCostModal = ({ order, setOrders, setShowModal }) => {
 
 MemoPaidCostModal.propTypes = {
   setShowModal: PropTypes.func.isRequired,
-  setOrders: PropTypes.func,
   order: PropTypes.object,
+  refetch: PropTypes.func,
 };
 
 const PaidCostModal = memo(MemoPaidCostModal);

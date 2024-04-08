@@ -1,8 +1,8 @@
 import { getData } from "../utils/GeneralFunctions"
 import { MAIN_URL } from "../utils/GeneralVariables"
 
-export async function ordersListApi() {
-    return await getData(MAIN_URL, 'admin/orders', 'get', {}, true)
+export async function ordersListApi(status) {
+    return await getData(MAIN_URL, 'admin/orders', 'get', { status }, true)
 }
 
 export async function destroyOrderApi(id) {

@@ -14,7 +14,7 @@ function sumPrice(order) {
     return totalPrice
 }
 
-const MemoOrdersTable = ({ orders, setOrders }) => {
+const MemoOrdersTable = ({ orders, refetch, setOrders }) => {
 
     const [showEdit, setShowEdit] = useState(null)
     const [showCostEdit, setShowCostEdit] = useState(null)
@@ -40,10 +40,14 @@ const MemoOrdersTable = ({ orders, setOrders }) => {
                                 <td className='text-start p-2'>{sumPrice(order)?.toLocaleString()}</td>
                                 <td className='text-start p-2'>{order?.paid_cost?.toLocaleString()}</td>
                                 <td className='flex items-center flex-wrap justify-center gap-1 py-2 px-1'>
-                                    <button className='bg-blue-200 p-1' onClick={() => setShowInfo(order)}>جزئیات</button>
-                                    <button className='bg-blue-100 p-1' onClick={() => setShowEdit(order)}>ویرایش</button>
-                                    <button className='bg-blue-100 p-1' onClick={() => setShowCostEdit(order)}>ویرایش قیمت</button>
-                                    <button className='bg-rose-100 text-rose-700 p-1' onClick={() => setShowRemove(order)}>حذف</button>
+                                    <button className='bg-blue-300 p-1' onClick={() => setShowInfo(order)}>جزئیات</button>
+                                    {
+                                        order?.status === "paid" ? <button className='bg-rose-100 text-rose-700 p-1' onClick={() => setShowRemove(order)}>حذف</button> :
+                                            <>
+                                                <button className='bg-blue-100 p-1' onClick={() => setShowEdit(order)}>ویرایش</button>
+                                                <button className='bg-sky-200 p-1' onClick={() => setShowCostEdit(order)}>ویرایش قیمت</button>
+                                            </>
+                                    }
                                 </td>
                             </tr>
                         ))
@@ -59,11 +63,11 @@ const MemoOrdersTable = ({ orders, setOrders }) => {
 
             {showCostEdit && (
                 <ModalParent removeCloseIcon size="md" setShowModal={setShowCostEdit}>
-                    <PaidCostModal order={showCostEdit} setOrders={setOrders} setShowModal={setShowCostEdit} />
+                    <PaidCostModal refetch={refetch} order={showCostEdit} setShowModal={setShowCostEdit} />
                 </ModalParent>
             )}
 
-            
+
             {showInfo && (
                 <ModalParent removeCloseIcon size="md" setShowModal={setShowInfo}>
                     <ShowOrderInfoModal order={showInfo} setShowModal={setShowInfo} />
@@ -82,6 +86,7 @@ const MemoOrdersTable = ({ orders, setOrders }) => {
 MemoOrdersTable.propTypes = {
     orders: PropTypes.array.isRequired,
     setOrders: PropTypes.func.isRequired,
+    refetch: PropTypes.func,
 };
 
 const OrdersTable = memo(MemoOrdersTable);
