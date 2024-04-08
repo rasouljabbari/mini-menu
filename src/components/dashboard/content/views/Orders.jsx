@@ -27,6 +27,8 @@ const MemoOrders = () => {
     setOrders(data?.orders);
   }, [data]);
 
+  console.log(data);
+
   return (
     <>
       <div className="py-14 flex flex-col gap-20">

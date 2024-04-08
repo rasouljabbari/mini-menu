@@ -72,7 +72,7 @@ const MemoOrdersTable = ({ orders, setOrders }) => {
 
             {showRemove && (
                 <ModalParent removeCloseIcon size="md" setShowModal={setShowRemove}>
-                    <RemoveItemModal order={showRemove} orders={orders} setOrders={setOrders} setShowModal={setShowRemove} />
+                    <RemoveItemModal order={showRemove} setOrders={setOrders} setShowModal={setShowRemove} />
                 </ModalParent>
             )}
         </>

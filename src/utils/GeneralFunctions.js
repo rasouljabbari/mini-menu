@@ -92,19 +92,16 @@ export const getData = async (
                     : `&${key}=${dataParams[key]}`
         }
 
-        try {
-            const { data, status } = isToken
+            const response = isToken
                 ? await axios.get(base_url + url + formData, header)
                 : await axios.get(base_url + url + formData)
-            if (status === 200) {
-                return { status: status, ...data }
+        console.log(response, response?.status);
+        
+            if (response?.status === 200) {
+                return response?.data
             } else {
-                toast.error('خطای ناخواسته ای پیش آمد')
-                return false
+                return apiErrorHandler(response);
             }
-        } catch (e) {
-            return apiErrorHandler(e)
-        }
     }
 }
 

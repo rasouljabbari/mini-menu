@@ -9,7 +9,6 @@ const customSwalData = {
 }
 
 export const apiErrorHandler = (e) => {
-  console.log(e.response);
   if (e.message === 'Network Error') {
     Swal.fire({
       icon: 'error',
