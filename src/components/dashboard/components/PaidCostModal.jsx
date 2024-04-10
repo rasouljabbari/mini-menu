@@ -78,7 +78,9 @@ const MemoPaidCostModal = ({ order, setShowModal, refetch }) => {
         <InputError errorItem={errorInfo} />
       }
 
-      <SubmitButton handler={() => setShowModal(false)} />
+      <SubmitButton
+        isLoading={updateOrderPaidCostMutation?.isLoading}
+        handler={() => setShowModal(false)} />
     </form>
   );
 };
