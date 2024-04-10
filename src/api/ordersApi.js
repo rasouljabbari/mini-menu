@@ -34,3 +34,7 @@ export async function updateOrderApi({ id, data }) {
 export async function updateOrderCostApi({ id, paid_cost }) {
     return await getData(MAIN_URL, `admin/orders/paid-cost/${id}`, 'post', { paid_cost }, true, true)
 }
+
+export async function changeStatusOrderApi({ id }) {
+    return await getData(MAIN_URL, `admin/orders/change-status/${id}`, 'post', { status: "paid" }, true)
+}

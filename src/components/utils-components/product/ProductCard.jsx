@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { Images } from "../../../utils/Images";
 import AddItemForMenuModal from "../../dashboard/components/AddItemForMenuModal";
 import ModalParent from "../../dashboard/components/ModalParent";
-import { toast } from "react-toastify";
 import { MAIN_URL_IMAGE } from "../../../utils/GeneralVariables";
 
 function ProductCard({ product, refetch }) {
@@ -20,21 +19,10 @@ function ProductCard({ product, refetch }) {
     return productInCartCount;
   });
 
-  const showEditHandler = (product) => {
-    const orders = JSON.parse(localStorage.getItem('orders'))
-
-    if (orders?.length > 0) {
-      toast.error("تا زمانی که سفارش پرداخت نشده دارید نمی توانید آیتمی را ویرایش کنید.")
-      return
-    }
-
-    setShowItem(product)
-  }
-
   return (
     <>
       <div
-        onClick={() => showEditHandler(product)}
+        onClick={() => setShowItem(product)}
         className="w-[136px] h-[183px] relative bg-product-frame z-30 mx-auto"
       >
         {/*image*/}

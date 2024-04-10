@@ -188,7 +188,9 @@ const MemoAddItemForMenuModal = ({ item, refetch, setShowModal }) => {
         <InputError errorItem={errorInfo} />
       }
 
-      <SubmitButton handler={() => setShowModal(false)} />
+      <SubmitButton
+        isLoading={updateProductMutation?.isLoading || storeProductMutation?.isLoading}
+        handler={() => setShowModal(false)} />
     </form>
   );
 };
