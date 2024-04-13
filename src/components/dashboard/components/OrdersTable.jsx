@@ -26,9 +26,9 @@ const MemoOrdersTable = ({ orders, refetch, setOrders }) => {
             <table className='w-full'>
                 <thead className='bg-jungle-800'>
                     <tr>
-                        <th className='text-start text-white p-2'>نام مشتری</th>
-                        <th className='text-end text-white p-2 whitespace-nowrap' dir='ltr'>(﷼) مبلغ کل</th>
-                        <th className='text-end text-white p-2 whitespace-nowrap' dir='ltr'>(﷼) مبلغ پرداختی</th>
+                        <th className='text-start text-white p-2'>نام</th>
+                        <th className='text-end text-white p-2 whitespace-nowrap' dir='ltr'>مبلغ کل</th>
+                        <th className='text-end text-white p-2 whitespace-nowrap' dir='ltr'>پرداختی</th>
                         <th className='text-center text-white p-2'>جزئیات</th>
                     </tr>
                 </thead>
@@ -45,7 +45,7 @@ const MemoOrdersTable = ({ orders, refetch, setOrders }) => {
                                         order?.status === "paid" ? <button className='bg-rose-100 text-rose-700 p-1' onClick={() => setShowRemove(order)}>حذف</button> :
                                             <>
                                                 <button className='bg-blue-100 p-1' onClick={() => setShowEdit(order)}>ویرایش</button>
-                                                <button className='bg-sky-200 p-1' onClick={() => setShowCostEdit(order)}>ویرایش قیمت</button>
+                                                <button className='bg-sky-200 p-1' onClick={() => setShowCostEdit(order)}>تسویه</button>
                                             </>
                                     }
                                 </td>

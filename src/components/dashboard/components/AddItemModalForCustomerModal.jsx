@@ -146,7 +146,7 @@ const MemoAddItemModalForCustomerModal = ({ order, refetch, setShowModal }) => {
   return (
     <form className="flex flex-col gap-6" onSubmit={submitHandler}>
       <h2 className="text-gray-900 text-lg font-semibold mb-1">
-        ثبت سفارش مشتری
+        سفارش مشتری
       </h2>
       <hr />
       <div className="flex flex-col gap-4">
@@ -201,7 +201,9 @@ const MemoAddItemModalForCustomerModal = ({ order, refetch, setShowModal }) => {
         <InputError errorItem={errorInfo} />
       }
 
-      <SubmitButton handler={() => setShowModal(false)} />
+      <SubmitButton 
+        isLoading={storeOrderMutation?.isLoading || updateOrderMutation?.isLoading}
+        handler={() => setShowModal(false)} />
     </form>
   );
 };

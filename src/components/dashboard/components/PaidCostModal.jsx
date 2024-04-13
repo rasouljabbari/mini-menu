@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import SubmitButton from "../../utils-components/button/SubmitButton";
 import { toast } from "react-toastify";
 import { useMutation } from "@tanstack/react-query";
-import { updateOrderCostApi } from "../../../api/ordersApi";
+import { changeStatusOrderApi, updateOrderCostApi } from "../../../api/ordersApi";
 import { apiErrorHandler } from "../../../utils/errorHandling";
 import InputError from "../../utils-components/input/InputError";
 import NumberInputWithLabel from "../../utils-components/input/NumberInputWithLabel";
@@ -38,25 +38,49 @@ const MemoPaidCostModal = ({ order, setShowModal, refetch }) => {
     updateOrderPaidCostMutation.mutate({ id: order?.id, paid_cost: paidCost })
   };
 
+  const changeStatusOrderMutation = useMutation({
+    mutationFn: changeStatusOrderApi,
+    onSuccess: async ({ data }) => {
+      toast.success(`سفارش ${data?.order?.full_name} با موفقیت پرداخت و ثبت شد.`)
+      refetch()
+      setShowModal(false)
+    },
+    onError: (error) => {
+      const errorResponse = apiErrorHandler(error);
+      if (errorResponse?.status === 422) {
+        setErrorInfo(errorResponse?.error);
+      }
+    },
+  })
+
+  const paidHandler = () => {
+    changeStatusOrderMutation.mutate({ id: order?.id})
+  }
+
   return (
     <form className="flex flex-col gap-6" onSubmit={submitHandler}>
-      <h2 className="text-gray-900 text-lg font-semibold mb-1">
-        ویرایش هزینه سفارش مشتری
-      </h2>
+      <div className="flex items-center justify-between gap-4">
+        <h2 className="text-gray-900 text-lg font-semibold mb-1">
+          ویرایش هزینه
+        </h2>
+        <button type="button" onClick={paidHandler} className="bg-blue-100 text-blue-600 rounded-lg px-4 h-10 w-fit">تسویه کامل</button>
+      </div>
       <hr />
-      <NumberInputWithLabel
-        name="paidCost"
-        label={"هزینه پرداخت شده"}
-        value={paidCost}
-        handler={(value) => setPaidCost(value)}
-      />
+        <NumberInputWithLabel
+          name="paidCost"
+          label={"هزینه پرداخت شده"}
+          value={paidCost}
+          handler={(value) => setPaidCost(value)}
+        />
 
       {
         errorInfo &&
         <InputError errorItem={errorInfo} />
       }
 
-      <SubmitButton handler={() => setShowModal(false)} />
+      <SubmitButton
+        isLoading={updateOrderPaidCostMutation?.isLoading}
+        handler={() => setShowModal(false)} />
     </form>
   );
 };
